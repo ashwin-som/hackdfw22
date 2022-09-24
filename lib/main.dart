@@ -1,114 +1,101 @@
 import 'package:flutter/material.dart';
 
+import 'HomePage.dart';
+
 void main() {
-  runApp(const MaterialApp(
-    title: 'Navigation Basics',
-    home: FirstRoute(),
-  ));
+  runApp(MyApp());
 }
 
-class FirstRoute extends StatelessWidget {
-  const FirstRoute({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Landing Page!'),
-      ),
-      body: Center(
-          child: Row(
-            children: [
-              ElevatedButton(
-                child: const Text('Furniture'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const FurnitureRoute()),
-                  );
-                },
-              ),
-              ElevatedButton(
-                child: const Text('Groceries'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const GroceriesRoute()),
-                  );
-                },
-              ),
-              ElevatedButton(
-                child: const Text('Clothing'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ClothingRoute()),
-                  );
-                },
-              ),
-            ],
-      )),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginDemo(),
     );
   }
 }
 
-class FurnitureRoute extends StatelessWidget {
-  const FurnitureRoute({super.key});
-
+class LoginDemo extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Furniture'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back to Main'),
-        ),
-      ),
-    );
-  }
+  _LoginDemoState createState() => _LoginDemoState();
 }
 
-class GroceriesRoute extends StatelessWidget {
-  const GroceriesRoute({super.key});
-
+class _LoginDemoState extends State<LoginDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Groceries'),
+        title: Text("Login Page"),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back to Main'),
-        ),
-      ),
-    );
-  }
-}
-
-class ClothingRoute extends StatelessWidget {
-  const ClothingRoute({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Clothing'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back to Main'),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 60.0),
+              child: Center(
+                child: Container(
+                    width: 200,
+                    height: 150,
+                    /*decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(50.0)),*/
+                    child: Image.asset('assets/login.png')),
+              ),
+            ),
+            Padding(
+              //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Email',
+                    hintText: 'abc@gmail.com'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                    hintText: 'Use special characters!'),
+              ),
+            ),
+            FlatButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => HomePage()));
+              },
+              child: Text(
+                'Forgot Password',
+                style: TextStyle(color: Colors.blue, fontSize: 15),
+              ),
+            ),
+            Container(
+              height: 50,
+              width: 250,
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                },
+                child: Text(
+                  'Login',
+                  style: TextStyle(color: Colors.white, fontSize: 25),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 130,
+            ),
+            Text('New User? Create Account')
+          ],
         ),
       ),
     );
